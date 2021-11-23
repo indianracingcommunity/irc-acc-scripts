@@ -7,20 +7,13 @@ Generates an `entrylist` based on the signups on the website. <br>
 Requires `signuplatest.json` for the latest roster for the ACC Season <br>
 > Run command: `python entryListCreator.py` 
 
-
-<br>
-
 ---
-<br>
 
 ## Result to Grid
 Generates the new `entrylist` for the next ACC Race, depending on the finishing order of the previous race of the weekend. <br>
 > Run command: `python resultToGrid.py` 
 
-<br>
-
 ---
-<br>
 
 ## Result Split
 Split the website result file into multiple result files based on the driver classes. <br>
