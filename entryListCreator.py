@@ -1,11 +1,13 @@
 import json
 
-f = open('signuplatest.json', 'r')
+f = open('signups.json', 'r')
+clsFile = open('classes.json', 'r')
 # API Endpoint - https://indianracingcommunity.co.in/api/signups/{season_id}
 # Requires Authorization Header
 # Returns [{id, drivername, discord_id, racenumber, steam_id, attendance, car}, {...} ...]
 
 data = json.load(f)
+classData = json.load(clsFile)
 
 entrylist = {'entries': [],
              'forceEntryList': 1}
@@ -17,16 +19,28 @@ shortnames = []
 
 # TODO: Check if id is null, if so skip and print Username<@discord_id> back to Discord -> Missing from website
 # TODO: Check if driver is in classes.json, else print Username<@discord_id> back to Discord -> Missing a classes
+driverInPro = classData['pro']['drivers']
+driverInSilver = classData['silver']['drivers']
+driverInAm = classData['am']['drivers']
+
 for driver in data:
-    drivername = driver['drivername']
-    shortname = driver['drivername'][:3].upper()
-    racenumber = driver['racenumber']
+    drivername = driver['UserName']
+    shortname = driver['UserName'][:3].upper()
+    racenumber = driver['drivernumber']
+    userid = driver['user_id']
 
     if racenumber in racenumbers:
         print(drivername + ' has a clash of race number ' + racenumber)
 
     if shortname in shortnames:
         print(shortname + ' is already taken')
+
+    if userid in driverInPro:
+        driverCat = 1
+    elif userid in driverInSilver:
+        driverCat = 3
+    else:
+        driverCat = 2
 
     racenumbers.append(racenumber)
     shortnames.append(shortname)
@@ -37,12 +51,12 @@ for driver in data:
                 'firstName': "",
                 'lastName': drivername,
                 'shortName': shortname,
-                'playerID': 'S' + driver['steam_id'],
-                'driverCategory': 0
+                'playerID': 'S' + driver['Steam'],
+                'driverCategory': int(driverCat)
             }
             ],
             'raceNumber': int(racenumber),
-            "forcedCarModel": int(driver['car']),
+            "forcedCarModel": int(driver['Car Value 1']),
             "defaultGridPosition": -1,
             "overrideDriverInfo": 1,
             "isServerAdmin": 0
