@@ -15,6 +15,7 @@ entrylist = {'entries': [],
 i = 0
 
 racenumbers = []
+racenumberstemp = []
 shortnames = []
 
 # TODO: Check if id is null, if so skip and print Username<@discord_id> back to Discord -> Missing from website
@@ -30,7 +31,11 @@ for driver in data:
     userid = driver['user_id']
 
     if racenumber in racenumbers:
-        print(drivername + ' has a clash of race number ' + racenumber)
+        for x in range(1,1000):
+            if x not in racenumberstemp:
+                racenumberstemp.append(x)
+                racenumber = x
+                break
 
     if shortname in shortnames:
         print(shortname + ' is already taken')
