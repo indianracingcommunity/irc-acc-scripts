@@ -28,7 +28,7 @@ for driver in data:
     drivername = driver['UserName']
     shortname = driver['UserName'][:3].upper()
     racenumber = driver['drivernumber']
-    userid = driver['user_id']
+    userid = int(driver['user_id'])
 
     if racenumber in racenumbers:
         for x in range(1,1000):
@@ -44,8 +44,11 @@ for driver in data:
         driverCat = 1
     elif userid in driverInSilver:
         driverCat = 3
+    elif userid in driverInAm:
+        driverCat = 2
     else:
         driverCat = 2
+        print(drivername + ' not assigned a class')
 
     racenumbers.append(racenumber)
     shortnames.append(shortname)
