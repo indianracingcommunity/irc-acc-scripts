@@ -48,7 +48,7 @@ for driver in data:
         driverCat = 2
     else:
         driverCat = 2
-        print(drivername + ' not assigned a class')
+        print(drivername + ' not assigned a class, defaulted to AM')
 
     racenumbers.append(racenumber)
     shortnames.append(shortname)
