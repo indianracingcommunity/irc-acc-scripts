@@ -29,6 +29,8 @@ for driver in data:
     shortname = driver['UserName'][:3].upper()
     racenumber = driver['drivernumber']
     userid = int(driver['user_id'])
+    justid = int(driver['id'])
+    # print(drivername + ' : userid : ' + str(userid) + ' ** id:' + str(justid))
 
     if racenumber in racenumbers:
         for x in range(1,1000):
@@ -40,15 +42,15 @@ for driver in data:
     if shortname in shortnames:
         print(shortname + ' is already taken')
 
-    if userid in driverInPro:
-        driverCat = 1
-    elif userid in driverInSilver:
+    if justid in driverInPro:
         driverCat = 3
-    elif userid in driverInAm:
-        driverCat = 2
+    elif justid in driverInSilver:
+        driverCat = 1
+    elif justid in driverInAm:
+        driverCat = 0
     else:
-        driverCat = 2
-        print(drivername + ' not assigned a class, defaulted to AM. User ID is :' +  str(userid))
+        driverCat = 0
+        print(drivername + ' not assigned a class, defaulted to AM. User ID is :' +  ': userid : ' + str(userid) + ' ** id:' + str(justid))
 
     racenumbers.append(racenumber)
     shortnames.append(shortname)
@@ -73,7 +75,7 @@ for driver in data:
 
     i = i + 1
 
-o_file = open('entrylist_temp.json', 'w', encoding='utf-16-le')
+o_file = open('entrylist.json', 'w', encoding='utf-16-le')
 
 o_file.write(json.dumps(entrylist, indent=4, sort_keys=True))
 
