@@ -22,6 +22,8 @@ catch (e) {
     process.exit()
 }
 
+var sum_drivers = 0
+
 // Read results file from args
 try { race = require(process.argv[2]) }
 catch (e) {
@@ -49,6 +51,7 @@ for(var c in classes) {
     // Filter Drivers which are present in class
     re = race.results.filter(d => classes[c].drivers.includes(d.driver_id))
 
+    sum_drivers += re.length
     r = {track: t, results: re}
     console.log(r)
     console.log("------ ^ " + c.toUpperCase() + " ^ ------")
@@ -64,3 +67,5 @@ for(var c in classes) {
         )
     }
 }
+
+console.log(race.results.length - sum_drivers)
